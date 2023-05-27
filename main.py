@@ -57,6 +57,18 @@ def remove_unnecessary_sql(sql_statement: sqlparse.sql.Statement) -> sqlparse.sq
 
     return sqlparse.sql.TokenList(token_list)
 
+def get_columns_by_table(cleaned_token_list: sqlparse.sql.TokenList) -> dict:
+    """
+    This function returns a dictionary of all the column names associated with a table.
+
+    Args
+    cleaned_token_list: sqlparse.sql.TokenList - A cleaned token list of a SQL statement from remove_unnecessary_sql 
+
+    Returns: dict - The tables are the keys and the columns selected are the values
+    """
+    pass
+
+
 
 
 def main() -> None:

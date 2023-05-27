@@ -3,7 +3,7 @@
 This is a python project designed to clean up SQL queries. Specifically, it seeks to do the following:
 
 - [ ] Remove unused columns in `SELECT` statements
-- [ ] Convert temp tables to 'CTE's
+- [ ] Convert temp tables to `CTE`s
 
 ## Table of Contents
 

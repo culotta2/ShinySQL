@@ -1,0 +1,4 @@
+Can't support -- comments or CREATE OR REPLACE TABLE syntax
+
+Change comments to /* Comment */ Syntax
+Change CREATE OR REPLACE TABLE to CREATE TABLE

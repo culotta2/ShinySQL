@@ -1,6 +1,14 @@
 import pathlib
 import sqlparse
 
+# from sql_metadata import Parser
+
+PARSER_MAP = {
+    'CREATE OR REPLACE': 'CREATE',
+    'TEMPORARY': None,
+    'TEMP': None,
+}
+
 def read_and_validate_sql_file(sql_path: pathlib.Path) -> str:
     """
     Checks that the sql file exists and returns the sql statement.
@@ -21,11 +29,45 @@ def read_and_validate_sql_file(sql_path: pathlib.Path) -> str:
     return sql
 
 
+def remove_unnecessary_sql(sql_statement: sqlparse.sql.Statement) -> sqlparse.sql.TokenList:
+    """
+    Returns a dictionary of all columns selected for a statement. 
+
+    Args
+    sql_statement: sqlparse.sql.Statement - A proper SQL statement that contains a select statement
+
+    Returns: dict - A dictionary of all columns selected by table for a statement
+    """
+
+    token_list = []
+
+    for token in sql_statement.tokens:
+        if token.ttype == sqlparse.tokens.DDL and token.value == 'CREATE OR REPLACE':
+            token.value = PARSER_MAP['CREATE OR REPLACE']
+            token_list.append(token)
+            # print(sqlparse.sql.Token(token.ttype, PARSER_MAP['CREATE OR REPLACE']))
+        elif token.ttype == sqlparse.tokens.Keyword and token.value == 'TEMPORARY':
+            continue
+        elif token.ttype == sqlparse.tokens.Keyword and token.value == 'TEMP':
+            continue
+        elif '--' in token.value:
+            continue
+        else:
+            token_list.append(token)
+
+    return sqlparse.sql.TokenList(token_list)
+
+
+
 def main() -> None:
     sql_path = pathlib.Path("raw_queries") / "raw_query.sql"
     sql = read_and_validate_sql_file(sql_path)
-    
-    print(sql)
 
+    for stmt in sqlparse.parse(sql):
+        res = remove_unnecessary_sql(stmt)
+        print(res)
+        print("\n")
+
+    
 if __name__ == "__main__":
     main()

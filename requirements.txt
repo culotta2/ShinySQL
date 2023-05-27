@@ -1,0 +1,2 @@
+sql-metadata==2.8.0
+sqlparse==0.4.4

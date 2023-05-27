@@ -9,9 +9,9 @@ This is a python project designed to clean up SQL queries. Specifically, it seek
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Features](#features)
-- [Contributing](#contributing)
-- [License](#license)
+<!-- - [Features](#features) -->
+<!-- - [Contributing](#contributing) -->
+<!-- - [License](#license) -->
 
 ## Installation
 
@@ -25,10 +25,10 @@ pip install -r requirements.txt
 
 ## Usage
 
-The following code will clean the specified SQL query:
+The following code will clean the hardcoded SQL query.
 
 ```sh
-python main.py raw_query.sql
+python main.py
 ```
 <!-- ## Features -->
 <!---->
